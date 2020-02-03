@@ -1,12 +1,115 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        {% block title %} GESTIÓN MAGMA{% endblock %}
+    </title>
+
+    {% include 'includes.html.twig' %}
+</head>
+
+<script>
+    var formatNumber = {
+        sepDecimal: ',', // separad
+        separador: ".", // separadoor para los decimales
+        formatear: function (num) {
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+            }
+            return this.simbol + splitLeft + splitRight;
+        },
+        new: function (num, simbol) {
+            this.simbol = simbol || '';
+            return this.formatear(num);
+        }
+    }
+
+    $(function () {
+        $('.tabla').DataTable({
+            "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
+            "autoWidth": true,
+            "jQueryUI": false,
+            "stateSave": true,
+            "order": [[0, "desc"]]
+        })
+        $('[data-toggle="tooltip"]').tooltip();
+        $('.fecha').datapicker;
+        $('.pestana').tabs();
+
+    });
+
+    function cerrarSesion() {
+        let recurso;
+        bootbox.confirm("CONFIRMAR SALIR DE LA SESIÓN ",
+            function (result) {
+                if (result) {
+                    recurso = Routing.generate("logout", true);
+                    window.location = recurso;
+                }
+            });
+    }
+
+</script>
+
+<body>
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="navbar-brand"><b>SEGUIMIENTO PROYECTO MAGMA</b></span>
+            </div>
+            <ul class="nav navbar-nav navbar-right centro-nav">
+                {% if app.user != null %}
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span> Bienvenido, {{ app.user.nombre }} ({{ app.user.perfil }})</span>
+                    <br/>
+                {% endif %}
+            </ul>
+            <div class="collapse navbar-collapse">
+                {% block menu %}
+                    {% if app.user != null %}
+                        {% include "menu.html.twig" %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section id="contenido">
+    {% include 'procesando.html.twig' %}
+
+    <div id="resultado"></div>
+
+    {% if app.user != null %}
+        <div class="container">
+            {#            <button class="btn btn-success btn-md" onclick="window.history.go(-1)">#}
+            {#                <span class="glyphicon glyphicon-arrow-left"></span> Atras#}
+            {#            </button>#}
+            <h3>{% block titulo %}{% endblock %}</h3>
+        </div>
+        {% block contenido %}
+            <div class="container"><img src="{{ asset('img/textoMagma.jpg') }}" width="700" height="250"/>
+            </div>
+        {% endblock %}
+    {% else %}
+        <div class="container">
+            <div class="container"><img src="{{ asset('img/textoMagma.jpg') }}" width="350" height="125"/>
+            </div>
+            {% block login %}
+            {% endblock %}
+        </div>
+    {% endif %}
+</section>
+<footer>
+    <br/>
+    <span class="label label-info">&copy; AGENCIA PARA LA ADMINISTRACIÓN DIGITAL DE LA COMUNIDAD DE MADRID </span>
+</footer>
+</body>
 </html>

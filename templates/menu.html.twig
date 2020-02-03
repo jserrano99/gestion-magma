@@ -1,0 +1,57 @@
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <div class="btn-group">
+        <a class="btn btn-default btn-primary dropdown-toggle" href="#">Inicio
+            <span class="glyphicon glyphicon-home"></span></a>
+    </div>
+{#    {% if app.user.perfil == 'ROLE_ADMIN' %}#}
+{#        {% include 'menu.admin.html.twig' %}#}
+{#    {% endif %}#}
+{#    <div class="btn-group">#}
+{#        <button type="button" class="btn btn-default dropdown-toggle btn-success"#}
+{#                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Gestión#}
+{#            <span class="glyphicon glyphicon-search"></span>#}
+{#            <span class="caret"></span>#}
+{#        </button>#}
+{#        <ul class="dropdown-menu">#}
+{#            <li><a href="{{path("queryContrato")}}">Contratos</a></li>#}
+{#            <li><a href="{{path("querySeguimiento")}}">Lineas de Seguimiento</a></li>#}
+{#            <li><a href="{{path("queryAgrupacion")}}">Agrupaciones</a></li>#}
+{#            <li><a href="{{path("queryEncargo")}}">Encargos</a></li>#}
+{#            <li><a href="{{path("queryRemedy")}}">Incidentes Remedy</a></li>#}
+{#            <li><a href="{{path("exportarTodo")}}">Exportar Planificable</a></li>#}
+{#            <li role="separator" class="divider"></li>#}
+{#            <li><a href="{{path("queryCertificadoServicios")}}" target="_blank">Certificado de Servicios</a></li>#}
+{#        </ul>#}
+{#    </div>#}
+{#    <div class="btn-group">#}
+{#        <button type="button"#}
+{#                class="btn btn-default dropdown-toggle btn-warning"#}
+{#                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informes#}
+{#            <span class="glyphicon glyphicon-print"></span>#}
+{#            <span class="caret"></span>#}
+{#        </button>#}
+{#        <ul class="dropdown-menu">#}
+{#            <li><a href="{{path("seguimientoImportes")}}" target="_blank">Seguimiento Importes Contrato</a></li>#}
+{#            <li><a href="{{path("seguimientoLineaBase")}}" target="_blank">Seguimiento Linea Base</a></li>#}
+{#            <li><a href="{{path("planificacionLB")}}" target="_blank">Planificación Linea Base</a></li>#}
+{#            <li><a href="{{path("seguimentoPLA")}}" target="_blank">Seguimiento Evolutivos </a></li>#}
+{#            <li role="separator" class="divider"></li>#}
+{#            <li><a href="{{path("esfuerzoComprometidoEquipoBase")}}" target="_blank">Esfuerzo Comprometido Equipo Base</a></li>#}
+{#            <li role="separator" class="divider"></li>#}
+{#            <li><a href="{{path("incidentesPorCentro")}}" target="_blank">Incidentes por Centro</a></li>#}
+{#        </ul>#}
+{#    </div>#}
+    <div class="btn-group">
+        <button type="button"
+                class="btn btn-default dropdown-toggle btn-info"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sesión
+            <span class="glyphicon glyphicon-user"></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{path("app_cambioPassword",{"id":app.user.id})}}">Cambio Password</a></li>
+            <li><a href="{{path("app_logout")}}">Salir</a></li>
+        </ul>
+    </div>
+
+</div>

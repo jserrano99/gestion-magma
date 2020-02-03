@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{autoFill.bootstrap4, buttons.colVis, dataTables.bootstrap4, dataTables.keyTable, font-awesome, keyTable.bootstrap4}" />
+  </component>
+</project>
